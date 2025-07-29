@@ -1,0 +1,43 @@
+import React, { useEffect, useRef, useState } from 'react';
+import './App.css';
+import { io } from 'socket.io-client';
+import './style.css';
+
+const socket = io('http://localhost:3001');
+
+function App() {
+  const videoRef = useRef(null);
+  const [peers, setPeers] = useState([]);
+
+  useEffect(() => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+    });
+
+    socket.emit('join-room', 've-room', socket.id);
+
+    socket.on('user-connected', userId => {
+      setPeers(prev => [...prev, userId]);
+    });
+
+    socket.on('user-disconnected', userId => {
+      setPeers(prev => prev.filter(id => id !== userId));
+    });
+  }, []);
+
+  return (
+    <div className="app">
+      <img src="/logo.png" alt="Ve Meet Logo" className="logo" />
+      <div className="grid">
+        <video ref={videoRef} autoPlay muted playsInline className="video" />
+        {peers.map(peerId => (
+          <div key={peerId} className="video placeholder">User {peerId}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default App;

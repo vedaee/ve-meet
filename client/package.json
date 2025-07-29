@@ -1,0 +1,30 @@
+{
+  "name": "ve-meet-client",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "process": "^0.11.10",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.7.0",
+    "react-scripts": "5.0.1",
+    "simple-peer": "^9.11.1",
+    "socket.io-client": "^4.7.2"
+  },
+  "scripts": {
+    "start": "set HTTPS=true&&set SSL_CRT_FILE=../ssl/192.168.29.23.crt&&set SSL_KEY_FILE=../ssl/192.168.29.23-key.crt&&react-scripts start",
+    "build": "react-scripts build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

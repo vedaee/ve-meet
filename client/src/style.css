@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+.logo {
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 10px;
+}
+
+.video, .placeholder {
+  width: 100%;
+  border-radius: 10px;
+  background: black;
+  height: 240px;
+  object-fit: cover;
+}

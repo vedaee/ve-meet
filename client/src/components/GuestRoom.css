@@ -1,0 +1,217 @@
+/* GuestRoom.css */
+
+/* General resets and base */
+* {
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #000000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffd700; /* Gold text */
+}
+
+/* Container */
+.guest-room-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Header */
+.guest-room-header {
+  background: #222;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ffd700;
+}
+
+.guest-room-header .logo {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffd700;
+  user-select: none;
+}
+
+.guest-room-header .logo .gold {
+  color: #f9d71c;
+  text-shadow: 0 0 10px #f9d71c;
+}
+
+.guest-room-header > div span {
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Main video grid */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive columns */
+  gap: 15px; /* Space between videos */
+  padding: 12px 20px;
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: #000;
+  justify-items: center; /* center video blocks horizontally */
+  align-items: start;
+  max-height: 75vh;
+}
+
+.video-block {
+  background: #111;
+  border: 2px solid #444;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 16 / 9;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+  overflow: hidden;
+}
+
+.video-block.fullscreen-video {
+  grid-column: 1 / -1 !important;
+  grid-row: 1 / 2 !important;
+  height: 70vh;
+  border-color: #ffd700;
+  box-shadow: 0 0 15px #ffd700;
+  z-index: 10;
+  max-width: none;
+  aspect-ratio: auto;
+}
+
+.video-block video.video {
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  background: black;
+  object-fit: cover;
+}
+
+.video-block.fullscreen-video video.video {
+  object-fit: contain;
+}
+
+/* Participant name under video */
+.video-block p {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #ffd700;
+  font-weight: 600;
+  text-align: center;
+  user-select: none;
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+/* Participants panel */
+.participants-panel {
+  background: #111;
+  border-top: 2px solid #ffd700;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #ffd700;
+  user-select: none;
+}
+
+.participants-panel h3 {
+  margin-top: 0;
+  font-weight: 700;
+  text-shadow: 0 0 6px #f9d71c;
+}
+
+.participants-panel ul {
+  list-style: none;
+  padding: 0;
+  max-height: 120px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.participants-panel ul li {
+  margin: 4px 0;
+  border-bottom: 1px solid #333;
+  padding-bottom: 3px;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.controls button {
+  background-color: #222;
+  border: 2px solid #ffd700;
+  color: #ffd700;
+  padding: 8px 18px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  user-select: none;
+  min-width: 100px;
+}
+
+.controls button:hover {
+  background-color: #ffd700;
+  color: #000;
+}
+
+.controls button.end-btn {
+  border-color: #ff3300;
+  color: #ff3300;
+}
+
+.controls button.end-btn:hover {
+  background-color: #ff3300;
+  color: #fff;
+}
+
+/* Scrollbars */
+.video-grid::-webkit-scrollbar,
+.participants-panel ul::-webkit-scrollbar {
+  width: 8px;
+}
+
+.video-grid::-webkit-scrollbar-thumb,
+.participants-panel ul::-webkit-scrollbar-thumb {
+  background-color: #ffd700aa;
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .video-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .video-block.fullscreen-video {
+    height: 50vh;
+  }
+
+  .participants-panel {
+    font-size: 12px;
+    max-height: 100px;
+    padding: 8px 12px;
+  }
+
+  .controls button {
+    min-width: 80px;
+    padding: 6px 12px;
+  }
+}
