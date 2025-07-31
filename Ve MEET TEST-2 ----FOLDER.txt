@@ -1,0 +1,57 @@
+Ve MEET TEST-2 ----FOLDER
+client
+client\build
+client\node_modules
+client\public
+client\src
+client\src\assets
+client\src\components
+client\src\components\.env
+client\src\components\.env.txt
+client\src\components\GuestRoom.css
+client\src\components\GuestRoom.js
+client\src\components\Home.js
+client\src\components\Room.css
+client\src\components\Room.js
+client\src\components\SignalingManager.js
+client\src\components\VideoTile.js
+client\src\webrtc
+client\src\App.css
+client\src\App.js
+client\src\firebase.js
+client\src\firebaseConfig.js
+client\src\index.js
+client\src\polyfills.js
+client\src\socket.js
+client\src\style.css
+client\.env
+client\.eslintrc.json
+client\package-lock.json
+client\package.json
+node_modules
+node_modules\@socket.io
+node_modules\debug
+node_modules\engine.io-client
+node_modules\engine.io-parser
+node_modules\ms
+node_modules\socket.io-client
+node_modules\socket.io-parser
+node_modules\ws
+node_modules\xmlhttprequest-ssl
+node_modules\.package-lock.json
+server
+server\node_modules
+server\index.js
+server\package-lock.json
+server\package.json
+server\server.js
+ssl
+All Text files.txt
+How to creat public link.txt
+How to create an ngrok public URL t.txt
+kill-port.bat
+package-lock.json
+package.json
+Test 2 Guest working.txt
+Test 2 Room working.txt
+Test 2 server working.txt

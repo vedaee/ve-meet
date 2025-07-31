@@ -80,15 +80,6 @@ const Room = () => {
           setParticipants(peersRef.current.map((p) => p.userName));
           delete videoRefs.current[id];
         });
-
-        // Add listener to update participant list dynamically from server
-        socket.on("update-participants", (participantsList) => {
-          setParticipants(participantsList);
-        });
-      })
-      .catch((err) => {
-        console.error("Media Device Error:", err);
-        alert("Could not access camera/microphone.");
       });
 
     return () => {
@@ -187,21 +178,14 @@ const Room = () => {
         const screenTrack = screenStream.getVideoTracks()[0];
         screenTrackRef.current = screenTrack;
 
-        // Replace video track with screen track for each peer
         peersRef.current.forEach(({ peer }) => {
-          const sender = peer._pc.getSenders().find((s) => s.track.kind === "video");
-          if (sender) sender.replaceTrack(screenTrack);
+          peer.replaceTrack(streamRef.current.getVideoTracks()[0], screenTrack, streamRef.current);
         });
-
-        // Replace local video to screen share stream
-        if (userVideo.current) userVideo.current.srcObject = screenStream;
 
         screenTrack.onended = () => {
           peersRef.current.forEach(({ peer }) => {
-            const sender = peer._pc.getSenders().find((s) => s.track.kind === "video");
-            if (sender) sender.replaceTrack(streamRef.current.getVideoTracks()[0]);
+            peer.replaceTrack(screenTrack, streamRef.current.getVideoTracks()[0], streamRef.current);
           });
-          if (userVideo.current) userVideo.current.srcObject = streamRef.current;
           setScreenSharing(false);
         };
 
@@ -257,7 +241,7 @@ const Room = () => {
       </main>
 
       <aside className="participants-panel">
-        <div>
+  <      div>
           <h3>Participants ({participants.length + 1})</h3>
           <ul>
             <li key={userName + "-self"}>{userName} (You)</li>
@@ -282,8 +266,9 @@ const Room = () => {
           </button>
         </div>
       </aside>
-    </div>
-  );
-};
+      </div>
+      );
+      };
 
-export default Room;
+      export default Room;
+

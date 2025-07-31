@@ -1,0 +1,56 @@
+C:\projects\Ve Meet TEST - 2\client
+C:\projects\Ve Meet TEST - 2\client\build
+C:\projects\Ve Meet TEST - 2\client\node_modules
+C:\projects\Ve Meet TEST - 2\client\public
+C:\projects\Ve Meet TEST - 2\client\src
+C:\projects\Ve Meet TEST - 2\client\src\assets
+C:\projects\Ve Meet TEST - 2\client\src\components
+C:\projects\Ve Meet TEST - 2\client\src\components\.env
+C:\projects\Ve Meet TEST - 2\client\src\components\.env.txt
+C:\projects\Ve Meet TEST - 2\client\src\components\GuestRoom.css
+C:\projects\Ve Meet TEST - 2\client\src\components\GuestRoom.js
+C:\projects\Ve Meet TEST - 2\client\src\components\Home.js
+C:\projects\Ve Meet TEST - 2\client\src\components\Room.css
+C:\projects\Ve Meet TEST - 2\client\src\components\Room.js
+C:\projects\Ve Meet TEST - 2\client\src\components\SignalingManager.js
+C:\projects\Ve Meet TEST - 2\client\src\components\VideoTile.js
+C:\projects\Ve Meet TEST - 2\client\src\webrtc
+C:\projects\Ve Meet TEST - 2\client\src\App.css
+C:\projects\Ve Meet TEST - 2\client\src\App.js
+C:\projects\Ve Meet TEST - 2\client\src\firebase.js
+C:\projects\Ve Meet TEST - 2\client\src\firebaseConfig.js
+C:\projects\Ve Meet TEST - 2\client\src\index.js
+C:\projects\Ve Meet TEST - 2\client\src\polyfills.js
+C:\projects\Ve Meet TEST - 2\client\src\socket.js
+C:\projects\Ve Meet TEST - 2\client\src\style.css
+C:\projects\Ve Meet TEST - 2\client\.env
+C:\projects\Ve Meet TEST - 2\client\.eslintrc.json
+C:\projects\Ve Meet TEST - 2\client\package-lock.json
+C:\projects\Ve Meet TEST - 2\client\package.json
+C:\projects\Ve Meet TEST - 2\node_modules
+C:\projects\Ve Meet TEST - 2\node_modules\@socket.io
+C:\projects\Ve Meet TEST - 2\node_modules\debug
+C:\projects\Ve Meet TEST - 2\node_modules\engine.io-client
+C:\projects\Ve Meet TEST - 2\node_modules\engine.io-parser
+C:\projects\Ve Meet TEST - 2\node_modules\ms
+C:\projects\Ve Meet TEST - 2\node_modules\socket.io-client
+C:\projects\Ve Meet TEST - 2\node_modules\socket.io-parser
+C:\projects\Ve Meet TEST - 2\node_modules\ws
+C:\projects\Ve Meet TEST - 2\node_modules\xmlhttprequest-ssl
+C:\projects\Ve Meet TEST - 2\node_modules\.package-lock.json
+C:\projects\Ve Meet TEST - 2\server
+C:\projects\Ve Meet TEST - 2\server\node_modules
+C:\projects\Ve Meet TEST - 2\server\index.js
+C:\projects\Ve Meet TEST - 2\server\package-lock.json
+C:\projects\Ve Meet TEST - 2\server\package.json
+C:\projects\Ve Meet TEST - 2\server\server.js
+C:\projects\Ve Meet TEST - 2\ssl
+C:\projects\Ve Meet TEST - 2\All Text files.txt
+C:\projects\Ve Meet TEST - 2\How to creat public link.txt
+C:\projects\Ve Meet TEST - 2\How to create an ngrok public URL t.txt
+C:\projects\Ve Meet TEST - 2\kill-port.bat
+C:\projects\Ve Meet TEST - 2\package-lock.json
+C:\projects\Ve Meet TEST - 2\package.json
+C:\projects\Ve Meet TEST - 2\Test 2 Guest working.txt
+C:\projects\Ve Meet TEST - 2\Test 2 Room working.txt
+C:\projects\Ve Meet TEST - 2\Test 2 server working.txt

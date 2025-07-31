@@ -1,0 +1,107 @@
+/* GuestHome.css */
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffd700; /* gold */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.guest-home-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px 20px;
+}
+
+.guest-home-box {
+  background: #111;
+  border: 2px solid #ffd700;
+  border-radius: 12px;
+  padding: 30px 25px;
+  box-shadow: 0 0 20px #f9d71c;
+  text-align: center;
+}
+
+.logoText {
+  font-size: 42px;
+  font-weight: 900;
+  margin-bottom: 30px;
+  user-select: none;
+}
+
+.logoText .gold {
+  color: #f9d71c;
+  text-shadow: 0 0 12px #f9d71c;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputBox {
+  padding: 14px 18px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 2px solid #ffd700;
+  background-color: #000;
+  color: #ffd700;
+  outline: none;
+  transition: border-color 0.3s ease;
+  user-select: text;
+}
+
+.inputBox::placeholder {
+  color: #bfae00;
+}
+
+.inputBox:focus {
+  border-color: #f9d71c;
+  box-shadow: 0 0 10px #f9d71c;
+}
+
+.actionBtn {
+  background-color: #ffd700;
+  border: none;
+  color: #000;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #f9d71c;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.actionBtn:hover {
+  background-color: #f9d71ccc;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 480px) {
+  .guest-home-container {
+    padding: 20px 15px;
+  }
+
+  .logoText {
+    font-size: 36px;
+    margin-bottom: 25px;
+  }
+
+  .inputBox {
+    font-size: 16px;
+    padding: 12px 14px;
+  }
+
+  .actionBtn {
+    font-size: 18px;
+    padding: 12px;
+  }
+}

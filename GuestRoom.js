@@ -1,7 +1,9 @@
+// GuestRoom.js
+
 import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
-import "./Room.css";
+import "./GuestRoom.css";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || "https://192.168.29.23:5000";
 
@@ -11,20 +13,19 @@ const socket = io(SERVER_URL, {
   rejectUnauthorized: false,
 });
 
-const Room = () => {
+const GuestRoom = () => {
   const [peers, setPeers] = useState([]);
   const [participants, setParticipants] = useState([]);
   const [userName, setUserName] = useState("");
   const [roomID, setRoomID] = useState("");
   const [micOn, setMicOn] = useState(true);
   const [camOn, setCamOn] = useState(true);
-  const [screenSharing, setScreenSharing] = useState(false);
 
   const userVideo = useRef();
   const peersRef = useRef([]);
   const streamRef = useRef();
-  const screenTrackRef = useRef();
   const videoRefs = useRef({});
+  const [screenSharerID, setScreenSharerID] = useState(null);
 
   useEffect(() => {
     const name = prompt("Enter your name");
@@ -55,15 +56,12 @@ const Room = () => {
         });
 
         socket.on("user-joined", (payload) => {
-          const alreadyExists = peersRef.current.some(p => p.peerID === payload.id);
-          if (alreadyExists) return;
-
-          const peer = addPeer(payload.signal, payload.id, payload.name, streamRef.current);
+          const peer = addPeer(payload.signal, payload.id, payload.name, stream);
           peersRef.current.push({ peerID: payload.id, peer, userName: payload.name });
           setPeers((users) => [...users, { peerID: payload.id, peer, userName: payload.name }]);
           setParticipants((list) => {
             if (!list.includes(payload.name)) return [...list, payload.name];
-            else return list;
+            return list;
           });
         });
 
@@ -79,11 +77,7 @@ const Room = () => {
           peersRef.current = peersRef.current.filter((p) => p.peerID !== id);
           setParticipants(peersRef.current.map((p) => p.userName));
           delete videoRefs.current[id];
-        });
-
-        // Add listener to update participant list dynamically from server
-        socket.on("update-participants", (participantsList) => {
-          setParticipants(participantsList);
+          if (screenSharerID === id) setScreenSharerID(null);
         });
       })
       .catch((err) => {
@@ -112,11 +106,12 @@ const Room = () => {
     peer.on("stream", (remoteStream) => {
       const videoElem = videoRefs.current[userToSignal];
       if (videoElem) {
-        try {
-          videoElem.srcObject = remoteStream;
-        } catch (e) {
-          videoElem.src = window.URL.createObjectURL(remoteStream);
-        }
+        videoElem.srcObject = remoteStream;
+      }
+
+      const trackLabel = remoteStream.getVideoTracks()?.[0]?.label || "";
+      if (trackLabel.toLowerCase().includes("screen")) {
+        setScreenSharerID(userToSignal);
       }
     });
 
@@ -141,11 +136,12 @@ const Room = () => {
     peer.on("stream", (remoteStream) => {
       const videoElem = videoRefs.current[callerId];
       if (videoElem) {
-        try {
-          videoElem.srcObject = remoteStream;
-        } catch (e) {
-          videoElem.src = window.URL.createObjectURL(remoteStream);
-        }
+        videoElem.srcObject = remoteStream;
+      }
+
+      const trackLabel = remoteStream.getVideoTracks()?.[0]?.label || "";
+      if (trackLabel.toLowerCase().includes("screen")) {
+        setScreenSharerID(callerId);
       }
     });
 
@@ -153,13 +149,7 @@ const Room = () => {
       console.error("Peer error (addPeer):", err);
     });
 
-    if (peer && typeof peer.signal === "function" && incomingSignal) {
-      try {
-        peer.signal(incomingSignal);
-      } catch (err) {
-        console.error("Error signaling peer:", err);
-      }
-    }
+    peer.signal(incomingSignal);
 
     return peer;
   };
@@ -180,52 +170,17 @@ const Room = () => {
     setCamOn(!camOn);
   };
 
-  const handleScreenShare = async () => {
-    if (!screenSharing) {
-      try {
-        const screenStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
-        const screenTrack = screenStream.getVideoTracks()[0];
-        screenTrackRef.current = screenTrack;
-
-        // Replace video track with screen track for each peer
-        peersRef.current.forEach(({ peer }) => {
-          const sender = peer._pc.getSenders().find((s) => s.track.kind === "video");
-          if (sender) sender.replaceTrack(screenTrack);
-        });
-
-        // Replace local video to screen share stream
-        if (userVideo.current) userVideo.current.srcObject = screenStream;
-
-        screenTrack.onended = () => {
-          peersRef.current.forEach(({ peer }) => {
-            const sender = peer._pc.getSenders().find((s) => s.track.kind === "video");
-            if (sender) sender.replaceTrack(streamRef.current.getVideoTracks()[0]);
-          });
-          if (userVideo.current) userVideo.current.srcObject = streamRef.current;
-          setScreenSharing(false);
-        };
-
-        setScreenSharing(true);
-      } catch (err) {
-        console.error("Screen share error:", err);
-      }
-    } else {
-      if (screenTrackRef.current) screenTrackRef.current.stop();
-      setScreenSharing(false);
-    }
-  };
-
-  const endMeeting = () => {
+  const leaveMeeting = () => {
     peersRef.current.forEach(({ peer }) => peer.destroy());
     peersRef.current = [];
     if (streamRef.current) streamRef.current.getTracks().forEach((track) => track.stop());
     socket.disconnect();
-    window.location.href = "/";
+    window.location.href = "/guest";
   };
 
   return (
-    <div className="room-container">
-      <header className="room-header">
+    <div className="guest-room-container">
+      <header className="guest-room-header">
         <h2 className="logo">
           Ve <span className="gold">Meet</span>
         </h2>
@@ -241,7 +196,12 @@ const Room = () => {
           <p>{userName} (You)</p>
         </div>
         {peers.map(({ peerID, userName }) => (
-          <div className="video-block" key={peerID}>
+          <div
+            className={`video-block ${
+              screenSharerID === peerID ? "fullscreen-video" : ""
+            }`}
+            key={peerID}
+          >
             <video
               playsInline
               autoPlay
@@ -257,28 +217,19 @@ const Room = () => {
       </main>
 
       <aside className="participants-panel">
-        <div>
-          <h3>Participants ({participants.length + 1})</h3>
-          <ul>
-            <li key={userName + "-self"}>{userName} (You)</li>
-            {participants.map((pName) => (
-              <li key={pName}>{pName}</li>
-            ))}
-          </ul>
-        </div>
+        <h3>Participants ({participants.length + 1})</h3>
+        <ul>
+          <li key={userName + "-self"}>{userName} (You)</li>
+          {participants.map((pName, idx) => (
+            <li key={`${pName}-${idx}`}>{pName}</li>
+          ))}
+        </ul>
 
         <div className="controls">
-          <button className="gold-btn" onClick={toggleMic}>
-            {micOn ? "Mute" : "Unmute"}
-          </button>
-          <button className="gold-btn" onClick={toggleCam}>
-            {camOn ? "Video Off" : "Video On"}
-          </button>
-          <button className="gold-btn" onClick={handleScreenShare}>
-            {screenSharing ? "Stop Sharing" : "Share Screen"}
-          </button>
-          <button className="red-btn" onClick={endMeeting}>
-            End Meeting
+          <button onClick={toggleMic}>{micOn ? "Mute" : "Unmute"}</button>
+          <button onClick={toggleCam}>{camOn ? "Video Off" : "Video On"}</button>
+          <button className="end-btn" onClick={leaveMeeting}>
+            Leave Meeting
           </button>
         </div>
       </aside>
@@ -286,4 +237,4 @@ const Room = () => {
   );
 };
 
-export default Room;
+export default GuestRoom;
