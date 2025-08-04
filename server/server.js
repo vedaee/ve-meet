@@ -44,7 +44,7 @@ io.on("connection", (socket) => {
 
     socket.emit("all-users", usersInRoom);
 
-    // Notify others in room about new user (signal null here, client will initiate signaling)
+    // Notify others in room about new user
     socket.to(roomId).emit("user-joined", {
       id: socket.id,
       name: userName,
@@ -60,11 +60,11 @@ io.on("connection", (socket) => {
   });
 
   // New user sending signal to existing user
-  socket.on("sending-signal", ({ userToSignal, callerID, signal }) => {
+  socket.on("sending-signal", ({ userToSignal, callerID, signal, userName }) => {
     io.to(userToSignal).emit("user-joined", {
       signal,
       id: callerID,
-      name: users[callerID]?.userName || "Guest",
+      name: userName || users[callerID]?.userName || "Guest",
     });
   });
 

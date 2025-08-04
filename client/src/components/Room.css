@@ -233,3 +233,38 @@ video {
   user-select: none;
   pointer-events: none;
 }
+
+@media only screen and (max-width: 768px) {
+  .video-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .video-block {
+    width: 100%;
+    height: auto;
+  }
+
+  .control-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .control-buttons button {
+    font-size: 16px;
+    padding: 10px 16px;
+    width: 90%;
+  }
+
+  .participant-list {
+    max-height: 150px;
+    overflow-y: auto;
+  }
+
+  .logo-ve-meet {
+    font-size: 24px;
+    text-align: center;
+  }
+}
