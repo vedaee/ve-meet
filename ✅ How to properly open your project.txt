@@ -1,0 +1,47 @@
+✅ How to properly open your project in VS Code:
+For example, to open your "Ve Meet TEST" folder:
+Open VS Code.
+
+Click on File → Open Folder...
+
+Select:
+C:\projects\Ve Meet TEST
+
+Click Open.
+
+You will now see all folders and files in the Explorer panel (left side).
+
+💻 To open a terminal in VS Code:
+Go to the top menu:
+Terminal → New Terminal
+
+A terminal will open at the bottom, already inside your folder (e.g. client or server).
+
+Now you can run:
+
+bash
+Copy
+Edit
+npm start       # in client folder
+node server.js  # in server folder
+🔁 Summary:
+Task	Use VS Code?	Use Notepad?
+Open/edit JavaScript files	✅ Yes	🚫 No
+Run server or client	✅ Yes (terminal)	🚫 No
+Copy/paste code correctly	✅ Yes	⚠️ Often breaks lines in Notepad
+
+So yes — always open and run your project inside VS Code. Let me know if you want me to show how to open client/server terminals correctly in it!
+
+👉 To open the client folder in VS Code’s terminal:
+In VS Code, go to the Explorer panel on the left.
+
+Right-click on the client folder.
+
+Click “Open in Integrated Terminal” from the menu.
+
+
+
+
+
+
+

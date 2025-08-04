@@ -1,0 +1,271 @@
+/* GuestRoom.css – Final Version with Fullscreen Screen Share Support */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+.room-container {
+  display: flex;
+  height: 100vh;
+  flex-direction: row;
+}
+
+.video-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: 10px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.video-block {
+  background-color: #1e1e1e;
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+}
+
+.video-block video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.video-name {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #ffd700;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Media control buttons */
+.controls {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid #ffd700;
+}
+
+.controls button {
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.controls button:hover {
+  background-color: #e6c200;
+}
+
+.controls button:disabled {
+  background-color: #555;
+  color: #999;
+  cursor: not-allowed;
+}
+
+/* Participants panel */
+.participants-panel {
+  width: 250px;
+  background-color: #111;
+  padding: 12px;
+  overflow-y: auto;
+  border-left: 2px solid #ffd700;
+  display: flex;
+  flex-direction: column;
+}
+
+.participants-panel h3 {
+  font-size: 16px;
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+.participants-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.participants-list li {
+  padding: 6px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #333;
+  color: #fff;
+}
+
+/* Zoom-style logo header */
+.ve-meet-logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.6);
+  margin: 10px 20px;
+}
+
+/* Fullscreen shared screen block (guest only) */
+.screen-share-block {
+  grid-column: 1 / -1;
+  width: 100%;
+  background-color: #000;
+  border: 3px solid #ffd700;
+  border-radius: 10px;
+  padding: 6px;
+  box-shadow: 0 0 12px #ffd70088;
+  position: relative;
+  margin-top: 20px;
+  max-width: 80vw;
+  overflow: hidden;
+}
+
+.screen-share-block video {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.screen-share-name,
+.screen-share-username {
+  text-align: center;
+  font-size: 16px;
+  color: #ffd700;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+/* Fullscreen class for user's own screen share */
+.video-block.fullscreen-video {
+  grid-column: span 2;
+  height: 60vh;
+}
+
+/* Fullscreen shared screen styles */
+.screen-share-container {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid gold;
+  border-radius: 12px;
+  padding: 8px;
+  background-color: #111;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.screen-share-video {
+  width: 100%;
+  max-height: 80vh;
+  border-radius: 12px;
+  object-fit: contain;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.screen-share-video:hover {
+  box-shadow: 0 0 14px rgba(255, 215, 0, 0.8);
+}
+
+/* When in fullscreen mode */
+:fullscreen {
+  background-color: #000;
+}
+
+/* HOST VIDEO BUTTONS AREA */
+.host-video-buttons {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+
+.video-block:hover .host-video-buttons {
+  opacity: 1;
+}
+
+/* Buttons inside host panel */
+.host-video-buttons button {
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: gold;
+  padding: 4px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Specific fullscreen button inside host-video-buttons */
+.fullscreen-btn {
+  font-size: 16px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .video-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .video-block.fullscreen-video {
+    height: 50vh;
+  }
+
+  .participants-panel {
+    width: 100%;
+    font-size: 12px;
+    max-height: 100px;
+    padding: 8px 12px;
+    border-top: 2px solid #ffd700;
+    border-left: none;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .controls button {
+    width: 90%;
+    max-width: 220px;
+    min-width: 80px;
+    padding: 6px 12px;
+  }
+
+  .screen-share-block video {
+    max-height: 50vh;
+  }
+
+  .screen-share-video {
+    max-height: 50vh;
+  }
+}

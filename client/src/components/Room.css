@@ -1,0 +1,235 @@
+/* General Layout */
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  font-family: 'Segoe UI', sans-serif;
+  height: 100%;
+  width: 100%;
+  color: white;
+  overflow: hidden;
+}
+
+.room-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+/* Left: Video Grid */
+.video-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Video Box */
+.video-container {
+  position: relative;
+  background-color: #222;
+  border: 2px solid #FFD700;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.video-name {
+  position: absolute;
+  bottom: 4px;
+  left: 6px;
+  background-color: rgba(0,0,0,0.5);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Right: Participant List */
+.participant-panel {
+  width: 220px;
+  background-color: #111;
+  border-left: 2px solid #FFD700;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.participant-panel h3 {
+  color: #FFD700;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.participant-name {
+  background-color: #222;
+  padding: 8px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* Bottom Controls (for Guest or Host) */
+.controls {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(17, 17, 17, 0.8);
+  padding: 10px 16px;
+  border-radius: 12px;
+  display: flex;
+  gap: 14px;
+  z-index: 1000;
+}
+
+.controls button {
+  background-color: #FFD700;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s ease;
+}
+
+.controls button:hover {
+  background-color: #e6c200;
+}
+
+/* Logo Style */
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  color: gold;
+  text-shadow: 2px 2px 6px #000;
+  z-index: 1001;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .participant-panel {
+    display: none;
+  }
+  .controls {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+.participants-panel {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding-bottom: 16px;
+  background-color: #000;
+  color: gold;
+  border-left: 1px solid gold;
+}
+
+.participants-panel h3 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.participants-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.gold-btn {
+  background-color: #111;
+  color: gold;
+  border: 1px solid gold;
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.gold-btn:hover {
+  background-color: gold;
+  color: #000;
+}
+
+.red-btn {
+  background-color: crimson;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.red-btn:hover {
+  background-color: darkred;
+}
+
+/* Fullscreen Screen Share Container */
+.screen-share-container {
+  position: fixed;
+  top: 60px;
+  /* leave space for header */
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 60px);
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1500;
+  border: 3px solid gold;
+  border-radius: 10px;
+  box-shadow: 0 0 20px gold;
+}
+
+/* Screen Share Video */
+.screen-share-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/* Screen Share Username Label */
+.screen-share-username {
+  color: gold;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 10px;
+  text-align: center;
+  text-shadow: 0 0 5px black;
+  user-select: none;
+  pointer-events: none;
+}

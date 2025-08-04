@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: url('./assets/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.logo {
+  display: block;
+  margin: 20px auto;
+  height: 100px;
+}
+
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+video {
+  border-radius: 12px;
+  width: 320px;
+  height: auto;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}

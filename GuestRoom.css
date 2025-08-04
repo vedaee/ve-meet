@@ -1,0 +1,161 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+.room-container {
+  display: flex;
+  height: 100vh;
+  flex-direction: row;
+}
+
+.video-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-gap: 10px;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.video-block {
+  background-color: #1e1e1e;
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.video-block video {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.video-name {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #ffd700;
+  font-weight: bold;
+  text-align: center;
+}
+
+.controls {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid #ffd700;
+}
+
+.controls button {
+  background-color: #ffd700;
+  color: #000;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.controls button:hover {
+  background-color: #e6c200;
+}
+
+.controls button:disabled {
+  background-color: #555;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.participants-panel {
+  width: 250px;
+  background-color: #111;
+  padding: 12px;
+  overflow-y: auto;
+  border-left: 2px solid #ffd700;
+  display: flex;
+  flex-direction: column;
+}
+
+.participants-panel h3 {
+  font-size: 16px;
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+.participants-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.participants-list li {
+  padding: 6px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #333;
+  color: #fff;
+}
+
+/* Zoom-style logo header */
+.ve-meet-logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.6);
+  margin: 10px 20px;
+}
+
+/* Fullscreen toggle layout */
+.video-block.fullscreen-video {
+  grid-column: span 2;
+  height: 60vh;
+}
+
+/* Responsive styles for mobile */
+@media (max-width: 768px) {
+  .video-grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .video-block.fullscreen-video {
+    height: 50vh;
+  }
+
+  .participants-panel {
+    width: 100%;
+    font-size: 12px;
+    max-height: 100px;
+    padding: 8px 12px;
+    border-top: 2px solid #ffd700;
+    border-left: none;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .controls button {
+    width: 90%;
+    max-width: 220px;
+    min-width: 80px;
+    padding: 6px 12px;
+  }
+}

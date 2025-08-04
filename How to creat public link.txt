@@ -1,0 +1,14 @@
+How to creat public link?
+
+open powershell
+paste:
+cd C:\ngrok-v3-stable-windows-amd64
+.\ngrok.exe http https://localhost:3000
+yo will get this :
+
+ngrok                                                                                                   (Ctrl+C to quit)                                                                                                                           Call internal services from your gateway: https://ngrok.com/r/http-request                                                                                                                                                                   Session Status                online                                                                                    Account                       shailesh jha (Plan: Free)                                                                 Version                       3.24.0                                                                                    Region                        India (in)                                                                                Latency                       78ms                                                                                      Web Interface                 http://127.0.0.1:4040                                                                     Forwarding                    https://8035cc3ebb54.ngrok-free.app -> https://localhost:3000                                                                                                                                                     Connections                   ttl     opn     rt1     rt5     p50     p90                                                                             0       0       0.00    0.00    0.00    0.00                                                                                                                                    
+
+
+this will be public sharable link:
+
+https://8035cc3ebb54.ngrok-free.app
